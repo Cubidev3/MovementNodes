@@ -1,0 +1,245 @@
+[gd_scene load_steps=39 format=3 uid="uid://b8y77e7s42o6p"]
+
+[ext_resource type="Texture2D" uid="uid://ccrdwruogf85c" path="res://icon.png" id="1_et17a"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_o265b"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/MacroMovement.gd" id="2_f4dum"]
+[ext_resource type="Script" path="res://Scripts/Movement/Direction/SetDirection.gd" id="5_wywd7"]
+[ext_resource type="Script" path="res://Scripts/Movement/Direction/VelocityDirection.gd" id="6_6bxkb"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/DotProductBasedMovement.gd" id="6_d2o70"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/Acceleration.gd" id="6_ioss5"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/VelocityLimit.gd" id="6_wl38b"]
+[ext_resource type="Script" path="res://Scripts/Movement/Direction/NonZeroDirection.gd" id="7_et5pa"]
+[ext_resource type="Script" path="res://Scripts/Movement/Direction/ScaledDirection.gd" id="7_kto5m"]
+[ext_resource type="Script" path="res://Scripts/Movement/Direction/InputDirection.gd" id="7_u80yn"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/Deceleration.gd" id="9_vhsib"]
+[ext_resource type="Script" path="res://Scripts/Movement/Components/Impulse.gd" id="13_oqddj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0gyk"]
+size = Vector2(128, 128)
+
+[sub_resource type="Resource" id="Resource_p503e"]
+script = ExtResource("6_6bxkb")
+real = false
+
+[sub_resource type="Resource" id="Resource_g5plt"]
+script = ExtResource("7_et5pa")
+direction = SubResource("Resource_p503e")
+default = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_w0asp"]
+script = ExtResource("5_wywd7")
+direction = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_14qaj"]
+script = ExtResource("7_kto5m")
+direction = SubResource("Resource_g5plt")
+scale = SubResource("Resource_w0asp")
+
+[sub_resource type="Resource" id="Resource_yolu3"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, -1)
+
+[sub_resource type="Resource" id="Resource_6tbb0"]
+script = ExtResource("7_u80yn")
+up_direction = SubResource("Resource_yolu3")
+right_action = "right"
+left_action = "left"
+down_action = ""
+up_action = ""
+
+[sub_resource type="Resource" id="Resource_200l3"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, -1)
+
+[sub_resource type="Resource" id="Resource_hvr6u"]
+script = ExtResource("7_u80yn")
+up_direction = SubResource("Resource_200l3")
+right_action = "right"
+left_action = "left"
+down_action = ""
+up_action = ""
+
+[sub_resource type="Resource" id="Resource_fmgik"]
+script = ExtResource("7_u80yn")
+up_direction = SubResource("Resource_200l3")
+right_action = "right"
+left_action = "left"
+down_action = ""
+up_action = ""
+
+[sub_resource type="Resource" id="Resource_pwdai"]
+script = ExtResource("5_wywd7")
+direction = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_vmm68"]
+script = ExtResource("5_wywd7")
+direction = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_r8ofw"]
+script = ExtResource("6_6bxkb")
+real = false
+
+[sub_resource type="Resource" id="Resource_hs3tn"]
+script = ExtResource("7_et5pa")
+direction = SubResource("Resource_r8ofw")
+default = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_wv7ir"]
+script = ExtResource("5_wywd7")
+direction = Vector2(1, 0)
+
+[sub_resource type="Resource" id="Resource_dq00a"]
+script = ExtResource("7_kto5m")
+direction = SubResource("Resource_hs3tn")
+scale = SubResource("Resource_wv7ir")
+
+[sub_resource type="Resource" id="Resource_7tja7"]
+script = ExtResource("7_u80yn")
+up_direction = SubResource("Resource_yolu3")
+right_action = "right"
+left_action = "left"
+down_action = ""
+up_action = ""
+
+[sub_resource type="Resource" id="Resource_ldf8a"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, -1)
+
+[sub_resource type="Resource" id="Resource_y5m8h"]
+script = ExtResource("6_6bxkb")
+real = false
+
+[sub_resource type="Resource" id="Resource_460cw"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_g6hv0"]
+script = ExtResource("7_kto5m")
+direction = SubResource("Resource_y5m8h")
+scale = SubResource("Resource_460cw")
+
+[sub_resource type="Resource" id="Resource_tems5"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_ypbl6"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_om5cq"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_2wiw6"]
+script = ExtResource("5_wywd7")
+direction = Vector2(0, -1)
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("body", "movement", "gravity", "jump")]
+script = ExtResource("1_o265b")
+body = NodePath("..")
+movement = NodePath("../GroundMovement")
+gravity = NodePath("../Gravity")
+jump = NodePath("../GroundJump")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_et17a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b0gyk")
+
+[node name="GroundMovement" type="Node" parent="."]
+script = ExtResource("2_f4dum")
+
+[node name="RunningAcceleration" type="Node" parent="GroundMovement" node_paths=PackedStringArray("positive", "negative", "zero")]
+script = ExtResource("6_d2o70")
+direction_a = SubResource("Resource_14qaj")
+direction_b = SubResource("Resource_6tbb0")
+positive = NodePath("Acceleration")
+negative = NodePath("TurnAcceleration")
+zero = NodePath("Deceleration")
+
+[node name="Acceleration" type="Node" parent="GroundMovement/RunningAcceleration"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_hvr6u")
+magnitude = 2500.0
+
+[node name="TurnAcceleration" type="Node" parent="GroundMovement/RunningAcceleration"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_fmgik")
+magnitude = 6250.0
+
+[node name="Deceleration" type="Node" parent="GroundMovement/RunningAcceleration"]
+script = ExtResource("9_vhsib")
+axis = SubResource("Resource_pwdai")
+magnitude = 4166.67
+
+[node name="VelocityLimit" type="Node" parent="GroundMovement"]
+script = ExtResource("6_wl38b")
+axis = SubResource("Resource_vmm68")
+max_magnitude = 500.0
+
+[node name="AerialMovement" type="Node" parent="."]
+script = ExtResource("2_f4dum")
+
+[node name="RunningAcceleration" type="Node" parent="AerialMovement" node_paths=PackedStringArray("positive", "negative", "zero")]
+script = ExtResource("6_d2o70")
+direction_a = SubResource("Resource_dq00a")
+direction_b = SubResource("Resource_7tja7")
+positive = NodePath("Acceleration")
+negative = NodePath("TurnAcceleration")
+zero = NodePath("Deceleration")
+
+[node name="Acceleration" type="Node" parent="AerialMovement/RunningAcceleration"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_hvr6u")
+magnitude = 1250.0
+
+[node name="TurnAcceleration" type="Node" parent="AerialMovement/RunningAcceleration"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_fmgik")
+magnitude = 3125.0
+
+[node name="Deceleration" type="Node" parent="AerialMovement/RunningAcceleration"]
+script = ExtResource("9_vhsib")
+axis = SubResource("Resource_pwdai")
+magnitude = 2083.33
+
+[node name="VelocityLimit" type="Node" parent="AerialMovement"]
+script = ExtResource("6_wl38b")
+axis = SubResource("Resource_vmm68")
+max_magnitude = 500.0
+
+[node name="Gravity" type="Node" parent="."]
+script = ExtResource("2_f4dum")
+
+[node name="GravityChooser" type="Node" parent="Gravity" node_paths=PackedStringArray("positive", "negative", "zero")]
+script = ExtResource("6_d2o70")
+direction_a = SubResource("Resource_ldf8a")
+direction_b = SubResource("Resource_g6hv0")
+positive = NodePath("GoingUpGravity")
+negative = NodePath("GoingDownGravity")
+zero = NodePath("GoingUpGravity")
+
+[node name="GoingUpGravity" type="Node" parent="Gravity/GravityChooser"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_tems5")
+magnitude = 3950.62
+
+[node name="GoingDownGravity" type="Node" parent="Gravity/GravityChooser"]
+script = ExtResource("6_ioss5")
+direction = SubResource("Resource_ypbl6")
+magnitude = 5540.17
+
+[node name="VelocityLimit" type="Node" parent="Gravity"]
+script = ExtResource("6_wl38b")
+axis = SubResource("Resource_om5cq")
+max_magnitude = 1000.0
+limit_negative = false
+
+[node name="GroundJump" type="Node" parent="."]
+script = ExtResource("13_oqddj")
+direction = SubResource("Resource_2wiw6")
+magnitude = 1777.78
+mode = 1

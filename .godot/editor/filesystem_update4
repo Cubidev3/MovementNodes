@@ -1,0 +1,11 @@
+res://Scenes/GameObjects/player.tscn
+res://Scripts/Player/Player.gd
+res://Scenes/Stages/test_scene.tscn
+res://Scripts/Movement/Direction/InputDirection.gd
+res://Scripts/Movement/Components/RunningAcceleration.gd
+res://Scripts/Movement/Components/SurfaceDependentMovement.gd
+res://Scripts/Movement/Components/DirectionComparisonBasedMovement.gd
+res://Scripts/Movement/Components/DotProductBasedMovement.gd
+res://Scripts/Movement/Direction/ScaledDirection.gd
+res://Scripts/Movement/Components/VelocityLimit.gd
+res://Scripts/Movement/Components/Impulse.gd
